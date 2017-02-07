@@ -1,4 +1,49 @@
-# cf-example-build-arguments
+# Welcome
 
+So, you've decided to try Codefresh? Welcome on board!
 
-[![Codefresh build status]( https://g.codefresh.io/api/badges/build?repoOwner=codefreshdemo&repoName=cf-example-build-arguments&branch=master&pipelineName=cf-example-build-arguments&accountName=nikolai&type=cf-1)]( https://g.codefresh.io/repositories/codefreshdemo/cf-example-build-arguments/builds?filter=trigger:build;branch:master;service:58383c499750ce0100a9d104~cf-example-build-arguments)
+Using this repository we'll help you get up to speed with basic functionality such as: *building Docker images* with build arguments.
+
+This project uses `Node JS` to build an application which will eventually become a distributable Docker image.
+
+## Looking around
+
+In the root of this repository you'll find a file named `codefresh.yml`, this is our [build descriptor](https://docs.codefresh.io/docs/what-is-the-codefresh-yaml) and it describes the different steps that comprise our process.
+Let's quickly review the contents of this file.
+
+### Building
+
+To bake our application into a Docker image we use Codefresh's [Build step](https://docs.codefresh.io/docs/steps#section-build).
+
+The Build is a simplified abstraction over the Docker build command.
+
+```yml
+build_prj:
+    type: build
+    description: Build an Image With Build Arguments
+    image_name: codefreshio/yaml-example-build-arguments
+    dockerfile: Dockerfile
+    tag: ${{CF_BRANCH}}
+    build_arguments:
+        - argument=TEST
+```
+
+In Dockerfile you can use this build argument
+
+```
+ARG argument
+```
+
+Use the `image_name` field to declare the name of the resulting image (don't forget to change the image owner name from `codefreshdemo` to your own!).
+
+## Using This Example
+
+To use this example:
+
+* Fork this repository to your own [INSERT_SCM_SYSTEM (git, bitbucket)] account.
+* Log in to Codefresh using your [INSERT_SCM_SYSTEM (git, bitbucket)] account.
+* Click the `Add Service` button.
+* Select the forked repository.
+* Select the `I have a Codefresh.yml file` option.
+* Complete the wizard.
+* Rejoice!
