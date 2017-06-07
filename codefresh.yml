@@ -8,4 +8,4 @@ steps:
     dockerfile: Dockerfile
     tag: ${{CF_BRANCH}}
     build_arguments:
-        - argument="{'type': 'service_account','project_id':'cco-platform-166'}"
+        - argument='{"type":"service_account","project_id":"cco-platform-166"}'
