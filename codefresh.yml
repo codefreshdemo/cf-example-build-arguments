@@ -1,12 +1,6 @@
 version: '1.0'
 
 steps:
-  freestyle_step:
-    image: garland/aws-cli-docker:latest
-    fail-fast: false
-    commands:
-      - sh -c "[ ${{CF_BRANCH}} == ${{AWS_BRANCH}} ] && aws configure set region us-west-2 "
-
   build_prj:
     type: build
     description: Build an Image With Build Arguments
@@ -14,4 +8,4 @@ steps:
     dockerfile: Dockerfile
     tag: ${{CF_BRANCH}}
     build_arguments:
-        - argument="{}"
+        - argument="{'type':'test'}"
