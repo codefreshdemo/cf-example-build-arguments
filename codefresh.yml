@@ -5,7 +5,7 @@ steps:
     image: garland/aws-cli-docker:latest
     fail-fast: false
     commands:
-      - sh -c "[ ${{CF_BRANCH}} == ${{AWS_BRANCH}} ] && echo test"
+      - sh -c "[ ${{CF_BRANCH}} == ${{AWS_BRANCH}} ] && aws configure set region '${{AWS_REGION}}' "
 
   build_prj:
     type: build
