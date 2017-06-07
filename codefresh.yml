@@ -1,6 +1,11 @@
 version: '1.0'
 
 steps:
+  freestyle_step:
+    image: node:latest
+    commands:
+      - sh -c "[ ${{CF_BRANCH}} == ${{AWS_BRANCH}} ] && echo test"
+
   build_prj:
     type: build
     description: Build an Image With Build Arguments
