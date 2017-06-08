@@ -13,4 +13,4 @@ steps:
       condition:
         all:
           betaBranch: 'includes(lower("beta"), "beta") == true'
-          isTag: 'match("${{CF_BRANCH}}", "^test", true)'
+          isTag: 'match("${{CF_BRANCH}}", "^test", true) == true'
