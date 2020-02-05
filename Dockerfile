@@ -1,18 +1,17 @@
-FROM node:latest
+ARG NODE_VERSION
+FROM node:$NODE_VERSION
 
-ARG argument
+ARG APP_DIR
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p $APP_DIR
 
-WORKDIR /usr/src/app
+WORKDIR $APP_DIR
 
-COPY package.json /usr/src/app/
+COPY package.json .
 RUN npm install --silent
-COPY . /usr/src/app
+COPY . .
 EXPOSE 3000
 
 ENV PORT 3000
-
-RUN echo $argument
 
 CMD [ "npm", "start" ]

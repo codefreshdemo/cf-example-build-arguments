@@ -1,49 +1,27 @@
-# Welcome
+# Example of building a docker image with arguments
 
-So, you've decided to try Codefresh? Welcome on board!
+This is a Git repository that holds a Node application and a Dockerfile. The dockerfile is expecting two build arguments.
 
-Using this repository we'll help you get up to speed with basic functionality such as: *building Docker images* with build arguments.
+## Packaging the Node.js app
 
-This project uses `Node JS` to build an application which will eventually become a distributable Docker image.
+To compile and package using Docker 
 
-## Looking around
-
-In the root of this repository you'll find a file named `codefresh.yml`, this is our [build descriptor](https://docs.codefresh.io/docs/what-is-the-codefresh-yaml) and it describes the different steps that comprise our process.
-Let's quickly review the contents of this file.
-
-### Building
-
-To bake our application into a Docker image we use Codefresh's [Build step](https://docs.codefresh.io/docs/steps#section-build).
-
-The Build is a simplified abstraction over the Docker build command.
-
-```yml
-build_prj:
-    type: build
-    description: Build an Image With Build Arguments
-    image_name: codefreshio/yaml-example-build-arguments
-    dockerfile: Dockerfile
-    tag: ${{CF_BRANCH}}
-    build_arguments:
-        - argument=TEST
+```bash
+docker build . -t my-node-app --build-arg NODE_VERSION=8 --build-arg APP_DIR=/usr/src/app
 ```
 
-In Dockerfile you can use this build argument
+## Running the docker image
 
+```bash
+docker run -p 3000:3000 my-node-app
 ```
-ARG argument
-```
 
-Use the `image_name` field to declare the name of the resulting image (don't forget to change the image owner name from `codefreshdemo` to your own!).
+and then visit http://localhost:3000 in your browser
 
-## Using This Example
 
-To use this example:
+## To use this project in Codefresh
 
-* Fork this repository to your own [INSERT_SCM_SYSTEM (git, bitbucket)] account.
-* Log in to Codefresh using your [INSERT_SCM_SYSTEM (git, bitbucket)] account.
-* Click the `Add Service` button.
-* Select the forked repository.
-* Select the `I have a Codefresh.yml file` option.
-* Complete the wizard.
-* Rejoice!
+There is also a [codefresh.yml](codefresh.yml) for easy usage with the [Codefresh](codefresh.io) CI/CD platform.
+
+More details can be found in [Codefresh documentation](https://codefresh.io/docs/docs/yaml-examples/examples/build-an-image-with-build-arguments/).
+
